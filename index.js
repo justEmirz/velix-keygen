@@ -10,7 +10,7 @@ app.use(express.static("public"))
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const LINKVERTISE_URL = "https://linkvertise.com/YOUR_LINK"
+const LINKVERTISE_URL = "https://link-hub.net/1785243/k9tA02OBt6d0"
 const ADMIN_PASS = "velixadmin"
 const WEBHOOK_URL = "https://discord.com/api/webhooks/1462352718692749363/FrkeoRS5CGyavplRdYjgbySTY5lU72yHdm9gBFDkXXbp3RIoH4o5OeDb-_YA4_0Bbxj8"
 
@@ -120,3 +120,4 @@ app.post("/admin/revoke", (req, res) => {
 app.listen(process.env.PORT || 3000, () =>
   console.log("☢️ VELIX NUCLEAR ONLINE")
 )
+
