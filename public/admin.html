@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>VELIX ADMIN</title>
+<style>
+body{background:#050510;color:#0ff;font-family:monospace}
+input,select,button{background:black;color:#0ff;border:1px solid #0ff;padding:6px;margin:4px}
+</style>
+</head>
+<body>
+
+<h2>☢️ VELIX ADMIN PANEL</h2>
+
+<input id="pass" placeholder="admin password">
+<button onclick="login()">LOGIN</button>
+
+<div id="panel" style="display:none">
+  <select id="tier">
+    <option>FREE</option>
+    <option>PREMIUM</option>
+    <option>VIP</option>
+  </select>
+  <button onclick="gen()">GENERATE</button>
+  <ul id="list"></ul>
+</div>
+
+<script>
+async function login(){
+  const r = await fetch("/admin/login",{method:"POST",headers:{'Content-Type':'application/json'},body:JSON.stringify({pass:pass.value})})
+  if(r.ok){panel.style.display="block";load()}
+}
+async function load(){
+  const k = await (await fetch("/admin/keys")).json()
+  list.innerHTML = k.map(x=>`<li>${x.key} | ${x.tier} | ${new Date(x.exp)}</li>`).join("")
+}
+async function gen(){
+  const r = await fetch("/admin/generate",{method:"POST",headers:{'Content-Type':'application/json'},body:JSON.stringify({tier:tier.value})})
+  alert((await r.json()).key)
+  load()
+}
+</script>
+</body>
+</html>
